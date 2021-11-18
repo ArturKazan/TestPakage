@@ -11,7 +11,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PatientsData {
+public class Patient {
     @Id
     private String uniqueId;
     @Column
@@ -25,7 +25,7 @@ public class PatientsData {
     @Column
     private String country;
     @Column
-    private String adress;
+    private String address;
     @Column
     private String state;
 

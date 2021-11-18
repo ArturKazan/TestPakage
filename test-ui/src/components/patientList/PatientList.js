@@ -1,25 +1,47 @@
 import './PatientList.css';
 import React, {useEffect, useState} from "react";
-import {getPatients} from "../api";
-import { render } from "react-dom";
-
+import {getPatients} from "../api"
 import { Dots } from "react-activity";
 import "react-activity/dist/Dots.css";
-const PatientList = () => {
+const PatientList = (props) => {
+    const [selectedPatient, setSelectedPatient] = useState("");
     const [patients, setPatients] = useState([]);
-    useEffect(()=>{
-        getPatients((data) => setPatients(data))
-    },[]);
-    return (
-        <div className="PatientList">
-            {patients.length > 0 ? patients.map((patient) =>
-                <div style={{height: 40, width:217, color:"#000000", border: "4px double black",background: "#fc3"}}>
-                    <p style={{fontSize:12,height:5, marringBottom:0}}>{patient.firstName} {patient.lastName}</p>
-                    <p style={{fontSize:8}}>{patient.adress}</p>
+    const [finishedLoading, setFinishedLoading] = useState(false);
 
+    useEffect(()=>{
+        getPatients((data) => {
+        setPatients(data);
+        setFinishedLoading(true);
+        })
+
+    },[props.reload]);
+    const getFilteredPatients = () => {
+        return patients.filter(p => {
+            const filter = props.filter.toLocaleLowerCase();
+            return p.firstName.toLocaleLowerCase().includes(filter) || p.lastName.toLocaleLowerCase().includes(filter)
+        })
+    }
+    const handleSelectPatient = (event, patient) => {
+        event.preventDefault();
+        if (selectedPatient === patient){
+            setSelectedPatient(null)
+        } else {
+            setSelectedPatient(patient);
+        }
+    }
+    return (
+        <div className="patientList">
+            {patients.length > 0 && getFilteredPatients().length > 0 ? getFilteredPatients().map((patient) =>
+                <div className={selectedPatient && patient.id === selectedPatient.id ? "patientContainer selected" : "patientContainer"}
+                     onClick={(event) => handleSelectPatient(event, patient)}>
+                    <p style={{fontSize:16}}>{patient.firstName} {patient.lastName}</p>
+                    <p style={{fontSize:12}}>{patient.address}</p>
                 </div>
 
-            ) : <Dots/>}
+            ) :
+                (patients.length > 0 && getFilteredPatients().length === 0) || (patients.length === 0 && finishedLoading) ?
+                    <p>No records found</p> :
+                <Dots/>}
         </div>
 
     );

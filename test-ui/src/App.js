@@ -1,17 +1,18 @@
 import './App.css';
+import React, {useState} from "react";
 import LeftLayout from "./components/leftLayout/LeftLayout";
+import Modal from './components/modal/Modal';
 import RightLayout from "./components/rightLayout/RightLayout";
 
 function App() {
 
+    const [show,setShow] = useState(false);
+
     return (
         <div className={"App"}>
-            <div style={{ "overflow-y": "scroll"}}>
-                <LeftLayout/>
-            </div>
-            <div className={'right-part'} >
+                <LeftLayout setShow={setShow} reload={show}/>
                 <RightLayout/>
-            </div>
+                <Modal show={show} onClose={() => setShow(false)}/>
         </div>
 
     );

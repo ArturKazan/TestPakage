@@ -1,9 +1,6 @@
 .left{
  text-align: left;
- width: 25%;
-
-}
-
-.input-line{
-
+ width: 40%;
+ border-right: 2px solid black;
+ height: 500px;
 }

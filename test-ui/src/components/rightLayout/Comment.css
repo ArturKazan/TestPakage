@@ -1,0 +1,10 @@
+.talkbubble {
+    width: 80%;
+    background: white;
+    border: 1px solid #000000;
+    position: relative;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}

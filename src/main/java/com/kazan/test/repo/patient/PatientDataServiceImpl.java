@@ -1,6 +1,6 @@
 package com.kazan.test.repo.patient;
 
-import com.kazan.test.model.PatientsData;
+import com.kazan.test.model.Patient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,32 +15,29 @@ public class PatientDataServiceImpl implements PatientDataService{
 
     @Override
     @Transactional
-    public PatientsData addPatientData(PatientsData patientsData) {
+    public Patient addPatientData(Patient patient) {
         UUID uuid = UUID.randomUUID();
-        patientsData.setUniqueId(uuid.toString());
-        return patientDataRepository.save(patientsData);
+        patient.setUniqueId(uuid.toString());
+        return patientDataRepository.save(patient);
     }
 
 
     @Override
     @Transactional
-    public List<PatientsData> selectAllPatient() {
+    public List<Patient> selectAllPatient() {
         return patientDataRepository.findAll();
 
     }
 
     @Override
-    @Transactional
-
-    public PatientsData editPatientData(PatientsData uuid, PatientsData editedData) {
-        PatientsData prop = findPatientData(uuid);
-        prop = patientDataRepository.save(editedData);
-        return prop;
+    public Patient editPatientData(Patient newPatient) {
+        return patientDataRepository.save(newPatient);
     }
+
 
     @Override
     @Transactional
-    public PatientsData findPatientData(PatientsData uuid) {
+    public Patient findPatientData(Patient uuid) {
         return patientDataRepository.findPatientsDataByUniqueId(uuid);
     }
 }

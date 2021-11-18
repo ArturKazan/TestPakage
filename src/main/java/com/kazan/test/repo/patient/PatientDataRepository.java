@@ -1,16 +1,16 @@
 package com.kazan.test.repo.patient;
-//Repository that will work with our database
-import com.kazan.test.model.PatientsData;
+
+import com.kazan.test.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface PatientDataRepository extends JpaRepository <PatientsData, String> {
+public interface PatientDataRepository extends JpaRepository <Patient, String> {
 
-    PatientsData findPatientsDataByUniqueId(PatientsData uniqueId);
+    Patient findPatientsDataByUniqueId(Patient uniqueId);
 
-    List<PatientsData> findAll();
+    List<Patient> findAll();
 
 }

@@ -1,0 +1,12 @@
+.patientContainer{
+    margin-bottom: 5px;
+    border: 1px solid black;
+    padding-left:10px
+}
+.patientList{
+    overflow-y: scroll;
+    height: 100%;
+}
+.selected {
+    background-color: antiquewhite;
+}

@@ -1,15 +1,14 @@
 package com.kazan.test.repo.patient;
 
-import com.kazan.test.model.PatientsData;
+import com.kazan.test.model.Patient;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface PatientDataService {
-   PatientsData addPatientData(PatientsData patientsData);
-   List<PatientsData> selectAllPatient();
-   PatientsData editPatientData(PatientsData uuid, PatientsData editedData);
+   Patient addPatientData(Patient patient);
+   List<Patient> selectAllPatient();
+   Patient editPatientData(Patient newPatient);
 
 
-   PatientsData findPatientData(PatientsData uniqueId);
+   Patient findPatientData(Patient uniqueId);
 }

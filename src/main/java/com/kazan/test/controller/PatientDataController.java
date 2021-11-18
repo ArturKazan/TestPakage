@@ -1,7 +1,6 @@
 package com.kazan.test.controller;
 
-import com.kazan.test.model.PatientsData;
-import com.kazan.test.repo.patient.PatientDataRepository;
+import com.kazan.test.model.Patient;
 import com.kazan.test.repo.patient.PatientDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,31 +13,22 @@ import java.util.UUID;
 @RequestMapping("patients/")
 @RequiredArgsConstructor
 public class PatientDataController {
-    private final PatientDataRepository patientDataRepository;
     private final PatientDataService patientDataService;
 
     @PostMapping("/create")
-    public PatientsData addPatient(
-            @RequestBody PatientsData patientsData
+    public Patient addPatient(
+            @RequestBody Patient patient
     ) {
-        return patientDataService.addPatientData(patientsData);
+        return patientDataService.addPatientData(patient);
     }
 
     @GetMapping("/get")
-    public List<PatientsData> getAllPatients() {
+    public List<Patient> getAllPatients() {
         return patientDataService.selectAllPatient();
     }
 
    @PostMapping("/edit")
-    public PatientsData editPatientData(PatientsData patientsData){
-        return patientDataRepository.save(patientsData);
-    }
-
-
-
-    @GetMapping("/getOne")
-    public PatientsData findPatientData(UUID id) {
- //       return patientDataRepository.findPatientsDataByUniqueId(id);
-        return null;
+    public Patient editPatientData(Patient patient){
+        return patientDataService.editPatientData(patient);
     }
 }

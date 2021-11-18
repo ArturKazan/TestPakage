@@ -1,12 +1,12 @@
 package com.kazan.test.repo.comment;
 
-import com.kazan.test.model.CommentsData;
+import com.kazan.test.model.Comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class CommentDataServiceImpl implements CommentDataService{
@@ -14,13 +14,13 @@ public class CommentDataServiceImpl implements CommentDataService{
 
 @Override
 @Transactional
-public CommentsData addComment(CommentsData commentsData){
-    return commentDataRepository.save(commentsData);
+public Comment addComment(Comment comment){
+    return commentDataRepository.save(comment);
 }
 
     @Override
     @Transactional
-    public List<CommentsData> getCommentsByPatientId(String patientId){
+    public List<Comment> getCommentsByPatientId(String patientId){
     return commentDataRepository.findAllByPatientId(patientId);
 }
 }

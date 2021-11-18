@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CommentsData {
+public class Comment {
     @Id
     private String commentId;
     @Column
