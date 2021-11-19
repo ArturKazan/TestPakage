@@ -1,7 +1,7 @@
 import './RightLayout.css'
 import React, {Component} from "react";
-import CommentLayout from "./CommentLayout";
-import PatientField from "./PatientField";
+import CommentLayout from "./comment/CommentLayout";
+import PatientField from "./patientField/PatientField";
 
 
 

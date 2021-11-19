@@ -10,9 +10,9 @@ function App() {
 
     return (
         <div className={"App"}>
-                <LeftLayout setShow={setShow} reload={show}/>
-                <RightLayout/>
-                <Modal show={show} onClose={() => setShow(false)}/>
+            <LeftLayout setShow={setShow} reload={show}/>
+            <RightLayout/>
+            <Modal show={show} onClose={() => setShow(false)}/>
         </div>
 
     );

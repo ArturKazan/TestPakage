@@ -18,6 +18,7 @@ const PatientField = () => {
                 <h4>General Info: </h4>
                 <h5>Address : {patient.address}</h5>
             </div>
+
         </div>
     )
 }

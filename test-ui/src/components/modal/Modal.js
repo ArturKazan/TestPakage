@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import "./Modal.css";
 import { createPatient } from "../api";
+
+
 const Modal = props =>{
     const [patient,setPatient] = useState({
         firstName: '',
@@ -11,35 +13,41 @@ const Modal = props =>{
         address:'',
         state:''
     });
+    const clearValue =(patient)=> {
+        patient.firstName = '';
+
+
+    }
     if (!props.show){
         return null
     }
+
 
     return(
         <div className={"modal"}>
             <div className={"modal-content"}>
                 <div className={"modal-header"}>
                     <h4 className={"modal-title"}>Create Patient</h4>
-            </div>
+                </div>
                 <div className={"modal-body"}>
                     <form>
                         <div>
-                        <label>
-                            First name: 
-                        </label>
-                        <input value={patient.firstName} onChange={(event) => {
-                            event.preventDefault();
-                            setPatient({...patient, firstName: event.target.value})
-                        }}/>
+                            <label>
+                                First name:
+                            </label>
+                            <input value={patient.firstName} onChange={(event) => {
+                                event.preventDefault();
+                                setPatient({...patient, firstName: event.target.value})
+                            }}/>
                         </div>
                         <div>
-                        <label>
-                            Last name: 
-                        </label>
-                        <input value={patient.lastName} onChange={(event) => {
-                            event.preventDefault();
-                            setPatient({...patient, lastName: event.target.value})
-                        }}/>
+                            <label>
+                                Last name:
+                            </label>
+                            <input value={patient.lastName} onChange={(event) => {
+                                event.preventDefault();
+                                setPatient({...patient, lastName: event.target.value})
+                            }}/>
                         </div>
                         <div>
                             <label>
@@ -94,7 +102,7 @@ const Modal = props =>{
                     <button onClick={() => {
                         createPatient((data) => {alert(data.firstName)}, patient);
                         props.onClose();
-                        
+                        clearValue(patient);
                     }} className={"button"}>Save</button>
                 </div>
             </div>
