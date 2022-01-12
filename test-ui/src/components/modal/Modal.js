@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./Modal.css";
-import { createPatient } from "../api";
+import { createPatient, updatePatient } from "../api";
 
 
 const Modal = props =>{
@@ -8,21 +8,29 @@ const Modal = props =>{
         firstName: '',
         lastName: '',
         birthDate:'',
-        sex:'',
+        sex:true,
         country:'',
         address:'',
         state:''
     });
+    useEffect(()=>{
+        if (props.mode === "EDIT"){
+            setPatient(props.patient);
+        }
+    },[props.mode])
     const clearValue =(patient)=> {
         patient.firstName = '';
-
+        patient.lastName = '';
+        patient.birthDate = '';
+        patient.sex = '';
+        patient.country = '';
+        patient.address = '';
+        patient.state = '';
 
     }
     if (!props.show){
         return null
     }
-
-
     return(
         <div className={"modal"}>
             <div className={"modal-content"}>
@@ -62,11 +70,15 @@ const Modal = props =>{
                             <label>
                                 Sex:
                             </label>
-                            <input value={patient.sex} onChange={(event) => {
+                            
+                            <select value={patient.sex} onChange={(event) => {
                                 event.preventDefault();
+                                console.log(event.target.value)
                                 setPatient({...patient, sex: event.target.value})
-
-                            }}/>
+                            }}>
+                                       <option value={true}>Male</option>
+                                        <option value={false}>Female</option>
+                            </select>
                         </div>
                         <div>
                             <label>
@@ -100,7 +112,11 @@ const Modal = props =>{
                 <div className={"modal-footer"}>
                     <button onClick={props.onClose} className={"button"}>Close</button>
                     <button onClick={() => {
+                        if (props.mode === "ADD"){
                         createPatient((data) => {alert(data.firstName)}, patient);
+                        } else {
+                            updatePatient((data) => {alert(data.firstName)}, patient);
+                        }
                         props.onClose();
                         clearValue(patient);
                     }} className={"button"}>Save</button>

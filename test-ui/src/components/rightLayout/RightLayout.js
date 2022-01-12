@@ -5,13 +5,12 @@ import PatientField from "./patientField/PatientField";
 
 
 
-export default class RightLayout extends Component {
-    render() {
+const RightLayout = (props) => {
         return (
             <div className={"right"}>
-                <PatientField/>
-                <CommentLayout/>
+                <PatientField patient={props.patient} setShow = {props.setShow} setMode = {props.setMode}/>
+                <CommentLayout patientId = {props.patient !== null ? props.patient.uniqueId : null}/>
             </div>
         )
-    }
 }
+export default RightLayout;

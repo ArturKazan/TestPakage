@@ -12,10 +12,11 @@ const LeftLayout = (props) => {
     return(
         <div className='left'>
             <SearchField handleFilter = {handleFilter}/>
-            <PatientList filter={filter} reload ={props.reload}/>
+            <PatientList filter={filter} reload ={props.reload} setPatient={props.setPatient}/>
             <button style={{width:"100%",height:40}} onClick={(event) => {
                 event.preventDefault();
-                props.setShow(true)
+                props.setMode("ADD");
+                props.setShow(true);
             }}>Add Patient</button>
         </div>
 

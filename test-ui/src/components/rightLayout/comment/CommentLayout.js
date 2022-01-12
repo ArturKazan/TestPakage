@@ -1,26 +1,42 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
+import { useState } from "react/cjs/react.development";
+import { createComment, getComments } from "../../api";
 import Comment from "./Comment";
-
-const CommentLayout = () => {
-    const comments = [
-        "Text 1",
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate ",
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ",
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ",
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ",
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo "
-    ]
+import "../RightLayout.css"
+const CommentLayout = (props) => {
+    const [comments, setComments] = useState([]);
+    const [comment, setComment] = useState("");
+    const [commentCreated, setCommentCreated] = useState(false);
+    useEffect(() => {
+        if (props.patientId || commentCreated ){
+            getComments((data) => {setComments(data.map(comment => {return ({text: comment.commentText, date: comment.commentDate})}))},props.patientId)
+            setCommentCreated(false);
+        }
+    },[props.patientId, commentCreated]);
+    const handleAddComment = (event) => {
+        const request = {
+            patientId: props.patientId,
+            commentText: comment,
+            commentDate: Date.now()
+        }
+        createComment((data) => alert(data.commentText),request)
+        setComment("")
+        setCommentCreated(true);
+        }
         return (
             <div>
             <h4>Comments: </h4>
-            <div className={"comments"}>
-                {comments.map((text) => {
-                   return <Comment comment={text}/>
+            <div className={"comments"} style={{width:800}}>
+                {comments.sort().map((comment) => {
+                   return <Comment comment={comment}/>
                 })}
             </div>
                 <div className={"newCommentArea"}>
-                <textarea name="textarea" style={{width: "80%", height: 60, marginTop:20}} placeholder={"Enter your comment"}/>
-                <button className={"button"}> + Comment</button>
+                <textarea value= {comment}  onChange={(event) => {
+                                event.preventDefault();
+                                setComment(event.target.value)
+                            }} name="textarea" style={{width: "80%", height: 60, marginTop:20}} placeholder={"Enter your comment"}/>
+                <button className={"button"} onClick={(event) => handleAddComment(event)} > + Comment</button>
                 </div>
             </div>
         );

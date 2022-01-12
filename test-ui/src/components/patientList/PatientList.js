@@ -22,17 +22,19 @@ const PatientList = (props) => {
         })
     }
     const handleSelectPatient = (event, patient) => {
+        console.log(patient)
         event.preventDefault();
         if (selectedPatient === patient){
             setSelectedPatient(null)
         } else {
             setSelectedPatient(patient);
+            props.setPatient(patient);
         }
     }
     return (
         <div className="patientList">
             {patients.length > 0 && getFilteredPatients().length > 0 ? getFilteredPatients().map((patient) =>
-                <div className={selectedPatient && patient.id === selectedPatient.id ? "patientContainer selected" : "patientContainer"}
+                <div className={selectedPatient && patient.uniqueId === selectedPatient.uniqueId ? "patientContainer selected" : "patientContainer"}
                      onClick={(event) => handleSelectPatient(event, patient)}>
                     <p style={{fontSize:16}}>{patient.firstName} {patient.lastName}</p>
                     <p style={{fontSize:12}}>{patient.address}</p>

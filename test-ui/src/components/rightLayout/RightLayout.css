@@ -22,6 +22,7 @@
     margin: 3px;
     height: 100%;
     block-size: 250px;
+    width:100%;
     scroll-padding-block-start: 250px;
 }
 .header{
