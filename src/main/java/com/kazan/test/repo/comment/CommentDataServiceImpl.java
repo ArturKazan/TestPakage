@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +16,8 @@ public class CommentDataServiceImpl implements CommentDataService{
 @Override
 @Transactional
 public Comment addComment(Comment comment){
+    UUID uuid = UUID.randomUUID();
+    comment.setCommentId(uuid.toString());
     return commentDataRepository.save(comment);
 }
 

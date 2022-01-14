@@ -28,7 +28,8 @@ public class PatientDataController {
     }
 
    @PostMapping("/edit")
-    public Patient editPatientData(Patient patient){
+    public Patient editPatientData(
+            @RequestBody Patient patient){
         return patientDataService.editPatientData(patient);
     }
 }

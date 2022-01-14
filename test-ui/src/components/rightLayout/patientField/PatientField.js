@@ -15,7 +15,7 @@ const PatientField = (props) => {
             </div>
             <div>
                 <h4>General Info: </h4>
-                <h5>Sex : {props.patient.sex ? "Male" : "Female" }</h5>
+                <h5>Sex : {props.patient.sex ? "Female" : "Male" }</h5>
                 <h5>Bitrhday : {props.patient.birthDate}</h5>
                 <h5>Country : {props.patient.country}</h5>
                 <h5>State : {props.patient.state}</h5>
