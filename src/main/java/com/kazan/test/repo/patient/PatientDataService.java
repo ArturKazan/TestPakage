@@ -9,6 +9,5 @@ public interface PatientDataService {
    List<Patient> selectAllPatient();
    Patient editPatientData(Patient newPatient);
 
-
-   Patient findPatientData(Patient uniqueId);
+   void removePatient(String patientId);
 }

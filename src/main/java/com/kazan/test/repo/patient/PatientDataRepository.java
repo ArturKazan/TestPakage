@@ -11,6 +11,8 @@ public interface PatientDataRepository extends JpaRepository <Patient, String> {
 
     Patient findPatientsDataByUniqueId(Patient uniqueId);
 
+    void deleteById(String id);
+
     List<Patient> findAll();
 
 }

@@ -34,10 +34,8 @@ public class PatientDataServiceImpl implements PatientDataService{
         return patientDataRepository.save(newPatient);
     }
 
-
     @Override
-    @Transactional
-    public Patient findPatientData(Patient uuid) {
-        return patientDataRepository.findPatientsDataByUniqueId(uuid);
+    public void removePatient(String patientId) {
+        patientDataRepository.deleteById(patientId);
     }
 }
